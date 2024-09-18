@@ -1,8 +1,8 @@
 class Category:
     name: str
     description: str
-    products: str
-    product_count: int
+    products: list
+    product_count = 0
     category_count = 0
 
     def __init__(self, name, description, products):

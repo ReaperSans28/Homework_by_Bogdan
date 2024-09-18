@@ -1,11 +1,14 @@
 import pytest
+
 from src.category import Category
 from src.product import Product
 
 
 @pytest.fixture
 def product_iphone():
-    return Product("Iphone 17 blble", "256TB, цвет 'Звезды в шоке', 200GP камера", 0.18, 4)
+    return Product(
+        "Iphone 17 blble", "256TB, цвет 'Звезды в шоке', 200GP камера", 0.18, 4
+    )
 
 
 def test_init1(product_iphone):
