@@ -5,9 +5,19 @@ class Category:
     product_count = 0
     category_count = 0
 
-    def __init__(self, name, description, products):
+    def __init__(self, name, description):
         self.name = name
         self.description = description
-        self.products = products
-        Category.product_count = len(products)
+        self.__products = []
         Category.category_count += 1
+
+    def add_product(self, product):
+        self.__products.append(product)
+        Category.product_count += 1
+
+    @property
+    def products(self):
+        product_list = []
+        for product in self.__products:
+            product_list.append(str(product))
+        return product_list
