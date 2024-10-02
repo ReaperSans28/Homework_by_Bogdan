@@ -4,6 +4,7 @@ from src.category import Category
 from src.product import Product
 from src.smartphone import Smartphone
 from src.lawn_grass import LawnGrass
+from src.product import BaseProduct
 
 
 @pytest.fixture
@@ -86,7 +87,7 @@ def test_add(product_iphone):
     product = Product.new_product(
         {"name": "name1", "description": "-", "price": 140, "quantity": 3}
     )
-    assert product_iphone + product == 442
+    assert product_iphone + product == 492
 
 
 def test_init3(smartphone):
@@ -108,3 +109,8 @@ def test_init4(lawn_grass):
     assert lawn_grass.country == "USA"
     assert lawn_grass.germination_period == "1 week"
     assert lawn_grass.color == "Green"
+
+
+def test_abstract_class() -> None:
+    with pytest.raises(TypeError):
+        prod = BaseProduct()

@@ -1,10 +1,62 @@
-class Product:
+from abc import ABC, abstractmethod
+
+
+# class BaseProduct(ABC):
+#     @abstractmethod
+#     def __init__(self):
+#         pass
+#
+#     @abstractmethod
+#     def __str__(self):
+#         pass
+#
+#     @abstractmethod
+#     def __add__(self, other):
+#         pass
+#
+#     @abstractmethod
+#     def new_product(self, parameters):
+#         pass
+#
+#
+# class MixinLog:
+#     def __init__(self, *args, **kwargs):
+#         print(repr(self))
+#
+#     def __repr__(self):
+#         return f"{self.__class__.__name__}({self.name}, {self.description}, {self.price}, {self.quantity})"
+
+class BaseProduct(ABC):
+    @abstractmethod
+    def __init__(self):
+        pass
+
+    @abstractmethod
+    def __str__(self):
+        pass
+
+    @abstractmethod
+    def __add__(self, other):
+        pass
+
+
+class MixinLog:
+    def __init__(self, *args, **kwargs):
+        print(repr(self))
+
+    def __repr__(self):
+        params = ', '.join(f'{a}={b!r}' for a, b in self.__dict__.items())
+        return f'{self.__class__.__name__}({params})'
+
+
+class Product(MixinLog, BaseProduct):
     name: str
     description: str
     __price: float
     quantity: int
 
     def __init__(self, name, description, price, quantity):
+        super().__init__(name, description, price, quantity)
         self.name = name
         self.description = description
         self.__price = price
