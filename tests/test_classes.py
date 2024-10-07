@@ -111,6 +111,23 @@ def test_init4(lawn_grass):
     assert lawn_grass.color == "Green"
 
 
-def test_abstract_class() -> None:
+def test_abstract_class():
     with pytest.raises(TypeError):
         prod = BaseProduct()
+
+
+def test_product_initialization_zero_quantity():
+    with pytest.raises(ValueError, match="Товар с нулевым количеством не может быть добавлен"):
+        Product("Тестовый продукт", "Описание", 100.0, 0)
+
+
+def test_category_average_price_no_products():
+    category = Category("Тестовая категория", "Описание категории", [])
+    assert category.average_price() == 0
+
+
+def test_category_average_price_zero_quantity_products():
+    with pytest.raises(ValueError, match="Товар с нулевым количеством не может быть добавлен") as e_info:
+        product1 = Product("Тестовый продукт 1", "Описание 1", 100.0, 1)
+        product2 = Product("Тестовый продукт 2", "Описание 2", 200.0, 0)
+        category = Category("Тестовая категория", "Описание категории", [product1, product2])

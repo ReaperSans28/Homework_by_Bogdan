@@ -1,31 +1,6 @@
 from abc import ABC, abstractmethod
 
 
-# class BaseProduct(ABC):
-#     @abstractmethod
-#     def __init__(self):
-#         pass
-#
-#     @abstractmethod
-#     def __str__(self):
-#         pass
-#
-#     @abstractmethod
-#     def __add__(self, other):
-#         pass
-#
-#     @abstractmethod
-#     def new_product(self, parameters):
-#         pass
-#
-#
-# class MixinLog:
-#     def __init__(self, *args, **kwargs):
-#         print(repr(self))
-#
-#     def __repr__(self):
-#         return f"{self.__class__.__name__}({self.name}, {self.description}, {self.price}, {self.quantity})"
-
 class BaseProduct(ABC):
     @abstractmethod
     def __init__(self):
@@ -56,6 +31,8 @@ class Product(MixinLog, BaseProduct):
     quantity: int
 
     def __init__(self, name, description, price, quantity):
+        if quantity <= 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
         super().__init__(name, description, price, quantity)
         self.name = name
         self.description = description
